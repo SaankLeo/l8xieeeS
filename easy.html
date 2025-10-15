@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shadows of the Digital Undercover</title>
+  <meta name="color-scheme" content="dark light"/>
+  <style>
+    :root {
+      color-scheme: dark;
+      /* GitHub/Discord inspired */
+      --bg: #0d1117;
+      --panel: #161b22;
+      --elev: #1b2130;
+      --text: #c9d1d9;
+      --muted: #8b949e;
+      --line: #30363d;
+      --accent: #58a6ff; /* GitHub blue */
+      --accent-2: #7289da; /* Discord blurple */
+      --good: #2ea043;
+      --bad: #f85149;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 14px;
+      --radius-sm: 10px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f8fa;
+        --panel: #ffffff;
+        --elev: #eef2f7;
+        --text: #24292f;
+        --muted: #57606a;
+        --line: #d0d7de;
+        --accent: #0969da;
+        --accent-2: #3867d6;
+        --good: #1a7f37;
+        --bad: #d1242f;
+        color-scheme: light;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1000px 600px at 10% -10%, rgba(88,166,255,0.08), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(114,137,218,0.06), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      letter-spacing: 0.2px;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--panel), var(--elev));
+      box-shadow: var(--shadow);
+    }
+
+    .title {
+      margin: 14px 0 10px;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(90deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, var(--panel), var(--elev));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .story {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .block {
+      background: linear-gradient(180deg, var(--panel), var(--elev));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .block h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .block p {
+      margin: 6px 0 0;
+      color: var(--text);
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+      margin: 14px 0;
+    }
+
+    .download {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: rgba(88,166,255,0.08);
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.06s ease, background 0.2s ease;
+    }
+    .download:hover { transform: translateY(-1px); }
+
+    .form {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    label {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: #0c1116;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(88,166,255,0.25);
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color: #0b1117;
+      border: 1px solid transparent;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.06s ease, filter 0.2s ease;
+      box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+    }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:active { transform: translateY(0); }
+
+    .response {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      display: none;
+    }
+    .response.success {
+      display: block;
+      border-color: rgba(46,160,67,0.45);
+      background: rgba(46,160,67,0.12);
+      color: var(--text);
+    }
+    .response.error {
+      display: block;
+      border-color: rgba(248,81,73,0.4);
+      background: rgba(248,81,73,0.12);
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 26px;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="brand">● NeoCorp Incident • Act I</div>
+        <h1 class="title">Shadows of the Digital Undercover</h1>
+        <p class="subtitle">A silent frequency crawls across midnight systems. The city doesn’t sleep—its packets whisper. Enter, decode, disappear. Flag format: <span class="accent">l8xieee{...}</span></p>
+      </div>
+
+      <div class="hero-card">
+        <h3 style="margin:0 0 8px;">The Artifact</h3>
+        <p style="margin:0 0 12px;">One image. Zero explanations. Pure consequence. Download and proceed at your own velocity.</p>
+        <a class="download" href="./bunsamosa.png" download>⬇ Download the Enigma</a>
+        <div class="divider"></div>
+        <form id="flagForm" class="form" action="YOUR_SUBMISSION_ENDPOINT" method="POST" novalidate>
+          <label for="flag">Submit your proof</label>
+          <input type="text" id="flag" name="flag" placeholder="l8xieee{...}" required />
+          <button type="submit" class="btn">Transmit</button>
+          <div id="responseBox" class="response" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="block">
+        <h3>Act II — Quiet Alarms</h3>
+        <p>Servers blink like distant constellations as a rumor threads through conduits; NeoCorp denies the tremor, but the logs keep breathing. Tonight, denial is cosmetic. The network has a pulse.</p>
+      </div>
+
+      <div class="block">
+        <h3>Act III — The Latch</h3>
+        <p>A courier drops a single frame into your path—no sender, no context, only gravity. You recognize the cadence: not noise, not random, but intention wearing pixels like a mask.</p>
+      </div>
+
+      <div class="block">
+        <h3>Act IV — Echoes</h3>
+        <p>Stories fracture, signals align, truth sharpens. Between silence and signal, there’s only the cut of certainty. Make your move. The channel closes when the echo fades.</p>
+      </div>
+    </section>
+
+    <footer>End of transmission.</footer>
+  </div>
+
+  <script>
+    // Client-only feedback for participants
+    const FLAG = "l8xieee{never_gonna_give_root_up}";
+    const form = document.getElementById("flagForm");
+    const input = document.getElementById("flag");
+    const box = document.getElementById("responseBox");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+
+      if (!value) {
+        setResponse("Empty signal. Transmit again.", "error");
+        return;
+      }
+
+      if (value === FLAG) {
+        setResponse("Valid signature. Channel unlocked.", "success");
+        // Optional next step for correct submissions:
+        // setTimeout(() => location.href = "next.html", 600);
+      } else {
+        setResponse("Signature rejected. Realign and retry.", "error");
+      }
+
+      // Optional server log without page reload:
+      // fetch(form.action, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ flag: value })
+      // });
+    });
+
+    function setResponse(message, type) {
+      box.textContent = message;
+      box.classList.remove("success", "error");
+      box.classList.add(type);
+    }
+  </script>
+</body>
+</html>
